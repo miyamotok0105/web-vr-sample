@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, WebVR! - A-Frame</title>
+    <meta name="description" content="Hello, WebVR! - A-Frame">
+    <!-- Bootstrap Bootswatch theme CSS - other themes available here: https://bootswatch.com -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <!-- Bootstrap JS Dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script> 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+
+   <!-- <script src="https://oscarmarinmiro.github.io/aframe-stereo-component/build.js"></script>-->
+
+	<script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v2.0.0/dist/aframe-physics-system.min.js"></script>
+	<script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+	<script src="https://ngokevin.github.io/kframe/components/log/dist/aframe-log-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-layout-component@4.1.0/dist/aframe-layout-component.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.11.4/dist/aframe-extras.min.js"></script>
+  <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+  <script src="https://cdn.rawgit.com/gladeye/aframe-preloader-component/1.0.0/dist/aframe-preloader-component.min.js"></script> 
+   <!-- <script src="https://unpkg.com/aframe-stereo-component@0.5.0/dist/aframe-stereo-component.min.js"></script> -->
+    <script src="stereo-component.js"></script>
+    <script src="lightinteraction.js"></script>
+    <script src="planeinteraction.js"></script>
+    <script src="partinteraction.js"></script>
+    <script src="lastanimationexplode.js"></script>
+    <script src="lastanimationimplode.js"></script>
+    <script src="constructionicon.js"></script>
+    <script src="lighticon.js"></script>
+    <script src="planeicon.js"></script>
+    <script src="backbutton.js"></script>
+    <script src="imagelightinteraction.js"></script>
+  </head>
+  <body>
+    <a-scene antialias="true" preloader>
+      <a-assets>
+       <!-- <video id="video" controls="controls" crossorigin="anonymous" >
+        	<!--<source src= "https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2Fdnoiz_1.mp4" type="video/mp4">
+        	<source src= "https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2Fnonfiltered.mp4?1519930607182" type="video/mp4">
+          
+        </video>
+      -->
+        
+        <img id="fut1" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F1.jpg?1516460891658">
+        <img id="fut2" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FCarlisleOhio.jpg?1519556546673">
+        <img id="fut3" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FWanliTaiwan.jpg?1519556549115">
+        <img id="fut4" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FBerlinDeutschland.jpg?1519557941937">
+        <img id="fut5" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FPensacolaFlorida.jpg?1519592272803">
+        <img id="fut6" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FEspooFinnland.jpg?1519594246078">
+        <img id="fut7" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FStrajaraSweden.JPG?1519594792730">
+        <img id="fut8" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FRockwellTexas.jpg?1519595086591">
+        <img id="fut9" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FEspooFinnland2.jpg?1519595198165">
+        <img id="fut10" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F10.jpg?1516460891658">
+
+        <!-- Paths to left and right images -->
+        <img id="day_left" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2Fcam1_oben_day.jpg?1520020866968">
+        <img id="day_right" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2Fcam1_unten_day.jpg?1520020866968">        
+        <img id="night_left" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2Fcam1_oben_night.jpg?1520020865816">
+        <img id="night_right" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2Fcam1_unten_night.jpg?1520020867811">
+        
+        
+        <!-- Paths to old futuro model (not used)
+        <a-asset-item id="futuro-obj" src="https://cdn.glitch.com/6bfdecfa-2605-490e-9eba-571ac1222cba%2Ffuturo_simple_2.obj?1515094084522"></a-asset-item>
+        <a-asset-item id="futuro-mtl" src="https://cdn.glitch.com/6bfdecfa-2605-490e-9eba-571ac1222cba%2Ffuturo_simple_2.mtl?1515094084522"></a-asset-item>  -->
+        <!-- Paths to futuro models -->
+        <a-asset-item id="capsule_inner-obj" src="https://cdn.glitch.com/80b90f56-6c4d-467e-b10a-36e8e309a339%2Fcapsule_inner.obj?1515608242116"></a-asset-item>
+        <a-asset-item id="capsule_streben-obj" src="https://cdn.glitch.com/80b90f56-6c4d-467e-b10a-36e8e309a339%2Fcapsule_streben.obj?1515608242260"></a-asset-item>
+        <a-asset-item id="capsule_floor-obj" src="https://cdn.glitch.com/80b90f56-6c4d-467e-b10a-36e8e309a339%2Fcapsule_floor.obj?1515608242260"></a-asset-item>
+        <a-asset-item id="capsule_outer-obj" src="https://cdn.glitch.com/80b90f56-6c4d-467e-b10a-36e8e309a339%2Fcapsule_outer.obj?1515608242260"></a-asset-item>
+        <a-asset-item id="stelzen-obj" src="https://cdn.glitch.com/80b90f56-6c4d-467e-b10a-36e8e309a339%2Fstelzen.obj?1515608242260"></a-asset-item>
+        <a-asset-item id="interiour-obj" src="https://cdn.glitch.com/80b90f56-6c4d-467e-b10a-36e8e309a339%2Finteriour.obj?1515608242260"></a-asset-item>
+     
+        <a-asset-item id="1_inner_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F1_inner_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="2_inner_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F2_inner_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="3_inner_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F3_inner_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="4_inner_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F4_inner_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="5_inner_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F5_inner_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="6_inner_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F6_inner_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="7_inner_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F7_inner_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="8_inner_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F8_inner_top.obj?1516654915173"></a-asset-item>
+      
+        <a-asset-item id="1_outer_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F1_outer_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="2_outer_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F2_outer_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="3_outer_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F3_outer_top.obj?1516654917327"></a-asset-item>
+        <a-asset-item id="4_outer_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F4_outer_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="5_outer_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F5_outer_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="6_outer_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F6_outer_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="7_outer_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F7_outer_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="8_outer_top" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F8_outer_top.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="schorn" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2Fschorn_1.obj?1519918579266"></a-asset-item>
+        
+        <a-asset-item id="1_outer_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F1_outer_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="2_outer_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F2_outer_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="3_outer_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F3_outer_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="4_outer_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F4_outer_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="5_outer_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F5_outer_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="6_outer_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F6_outer_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="7_outer_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F7_outer_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="8_outer_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F8_outer_bot.obj?1516654915173"></a-asset-item>
+        
+        <a-asset-item id="1_inner_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F1_inner_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="2_inner_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F2_inner_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="3_inner_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F3_inner_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="4_inner_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F4_inner_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="5_inner_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F5_inner_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="6_inner_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F6_inner_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="7_inner_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F7_inner_bot.obj?1516654915173"></a-asset-item>
+        <a-asset-item id="8_inner_bot" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2F8_inner_bot.obj?1516654915173"></a-asset-item>
+
+      </a-assets>
+      
+      <!-- video asset -->
+
+      
+      <!-- click sound -->
+      <audio id="audio" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2Fclick.mp3?1516470560587" autostart="false" ></audio>
+      <!-- Camera -->
+     <!-- <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 0 0" stereocam="eye:left;"> -->
+      <!--HMD "userHeight:0.0" position "0 0 0"-->
+      <a-entity camera="userHeight: 1.6" look-controls wasd-controls position="0 0 0" stereocam="eye:left;"> 
+      <!-- Cursor -->
+      <a-entity position="0 0 -1"
+              geometry="primitive: ring; radiusOuter: 0.03; radiusInner: 0.02;"
+              material="color: white; shader: flat"
+              cursor="maxDistance: 30; fuse: true; fuseTimeout:700"
+              raycaster="objects: .clickable">
+        <a-animation begin="fusing" easing="ease-in" attribute="scale"
+             fill="forwards" from="1 1 1" to="0.1 0.1 0.1" direction="alternate" dur="750" repeat="1"></a-animation>
+      </a-entity>
+      </a-entity>
+
+      <!-- Futuro base node -->
+        <a-entity id="futuro-base-node" position="0 -1.6 0.5">
+            <!-- Controller 
+            <a-entity id="controller" gearvr-controls="armModel: false; model: false;" position="0 1.5 -1.2" > -->
+            <a-entity position="0 1.5 -1.2">
+            <!-- futuro geometry node  -->
+            <a-entity id="futuro-geometry-node" scale="0.08 0.08 0.08" position="0 -1 -1">
+
+              <!-- top parts -->
+              <!-- part1 -->
+              
+              <a-entity rotation="0 45 0">
+               <a-entity class="explodable" rotation="0 -45 0" obj-model="obj: #1_outer_top" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 16 -1" delay="200" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 16 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity> 
+              <a-entity class="explodable" rotation="0 -45 0" obj-model="obj: #1_inner_top" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 16 -1" delay="200" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 16 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              </a-entity>
+         
+             
+             <!-- part2 -->
+
+              <a-entity rotation="0 90 0">
+               <a-entity class="explodable" rotation="0 -90 0" obj-model="obj: #2_outer_top" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 15 -1" delay="400" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 15 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity> 
+              <a-entity class="explodable" rotation="0 -90 0" obj-model="obj: #2_inner_top" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 15 -1" delay="400" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 15 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              </a-entity>
+         
+              <!-- part3 -->
+
+             <a-entity rotation="0 135 0">
+              <a-entity class="explodable" rotation="0 -135 0" obj-model="obj: #3_outer_top" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 14 -1" delay="600" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 14 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity class="explodable" rotation="0 -135 0" obj-model="obj: #3_inner_top" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 14 -1" delay="600" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 14 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+             </a-entity>
+
+              <!-- part4 -->
+             <a-entity rotation="0 180 0">
+              <a-entity class="explodable" rotation="0 -180 0" obj-model="obj: #4_outer_top" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 13 -1" delay="800" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 13 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity class="explodable" rotation="0 -180 0" obj-model="obj: #4_inner_top" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 13 -1" delay="800" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 13 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+            </a-entity>
+              
+              <!-- part5 -->
+             <a-entity rotation="0 225 0">
+              <a-entity class="explodable" rotation="0 -225 0" obj-model="obj: #5_outer_top" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 12 -1" delay="1000" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 12 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity rotation="0 -225 0" class="explodable" obj-model="obj: #5_inner_top" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 12 -1" delay="1000" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 12 -1" fill="forwards" to="0 0 0" > </a-animation>
+               </a-entity>
+              </a-entity>
+
+              <!-- part6 -->
+             <a-entity rotation="0 265 0">
+              <a-entity class="explodable" rotation="0 -265 0" obj-model="obj: #6_outer_top" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 11 -1" delay="1200" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 11 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity class="explodable" rotation="0 -265 0" obj-model="obj: #6_inner_top" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 11 -1" delay="1200" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 11 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+            </a-entity>
+               
+               
+              <!-- part7 -->
+             <a-entity rotation="0 310 0">
+              <a-entity class="explodable" rotation="0 -310 0" obj-model="obj: #7_outer_top" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 10 -1" delay="1400" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 10 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity class="explodable" rotation="0 -310 0" obj-model="obj: #7_inner_top" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 10 -1" delay="1400" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 10 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+            </a-entity>
+              
+              <!-- part8 -->
+             <a-entity rotation="0 360 0">
+              <a-entity class="explodable" obj-model="obj: #8_outer_top" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 9 -1" delay="1600" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 9 -1" fill="forwards" to="0 0 0" > </a-animation>
+              <a-entity class="explodable" obj-model="obj: #schorn" material="side: double; color:#7f7f7f; transparent: true;" partinteraction></a-entity>
+
+              </a-entity>
+              <a-entity class="explodable" obj-model="obj: #8_inner_top" material="side: double; color:#d05b05; transparent: true;" partinteraction >
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 9 -1" delay="1600" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 9 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+            </a-entity>
+              
+              <!-- floor -->
+              <a-entity class="explodable" obj-model="obj: #capsule_floor-obj" material="side: double; color:#7f7f7f; transparent: true;" partinteraction >
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="0 9 -1" delay="1800" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="0 9 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              
+              
+            <!-- bot parts -->  
+            <!-- part1 -->
+              <a-entity rotation="0 45 0">
+              <a-entity class="explodable" rotation="0 -45 0" obj-model="obj: #1_outer_bot" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 7 -1" delay="2000" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 7 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+                
+              <a-entity class="explodable" rotation="0 -45 0" obj-model="obj: #1_inner_bot" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 7 -1" delay="2000" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 7 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              </a-entity>
+              
+              <!-- part2 -->
+              <a-entity rotation="0 90 0">
+               <a-entity class="explodable" rotation="0 -90 0" obj-model="obj: #2_outer_bot" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 6.5 -1" delay="2200" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 6.5 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity class="explodable" rotation="0 -90 0" obj-model="obj: #2_inner_bot" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 6.5 -1" delay="2200" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 6.5 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              </a-entity>
+              
+              <!-- part3 -->
+              <a-entity rotation="0 135 0">
+                <a-entity class="explodable" rotation="0 -135 0" obj-model="obj: #3_outer_bot" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 6 -1" delay="2400" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 6 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              <a-entity class="explodable" rotation="0 -135 0" obj-model="obj: #3_inner_bot" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 6 -1" delay="2400" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 6 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              </a-entity>
+              
+              <!-- part4 -->
+              <a-entity rotation="0 180 0">
+                <a-entity class="explodable" rotation="0 -180 0" obj-model="obj: #4_outer_bot" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 5 -1" delay="2600" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 5 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity class="explodable" rotation="0 -180 0" obj-model="obj: #4_inner_bot" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 5 -1" delay="2600" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 5 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              </a-entity>
+              
+              <!-- part5 -->
+              <a-entity rotation="0 225 0">
+                <a-entity class="explodable" rotation="0 -225 0" obj-model="obj: #5_outer_bot" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 4.5 -1" delay="2800" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 4.5 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity class="explodable" rotation="0 -225 0" obj-model="obj: #5_inner_bot" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 4.5 -1" delay="2800" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 4.5 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              </a-entity>
+              
+              <!-- part6 -->
+              <a-entity rotation="0 270 0">
+                <a-entity class="explodable" rotation="0 -270 0" obj-model="obj: #6_outer_bot" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 4 -1" delay="3000" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 4 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity class="explodable" rotation="0 -270 0" obj-model="obj: #6_inner_bot" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 4 -1" delay="3000" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 4 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              </a-entity>
+              
+              <!-- part7 -->
+              <a-entity rotation="0 315 0">
+                <a-entity class="explodable" rotation="0 -315 0" obj-model="obj: #7_outer_bot" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 3.5 -1" delay="3200" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 3.5 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity class="explodable" rotation="0 -315 0" obj-model="obj: #7_inner_bot" material="side: double; color:#d05b05; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 3.5 -1" delay="3200" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 3.5 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              </a-entity>
+              
+              <!-- part8 -->
+              <a-entity rotation="0 360 0">
+                <a-entity class="explodable" rotation="0 -360 0" obj-model="obj: #8_outer_bot" material="side: double; color:#7f7f7f; transparent: true;" partinteraction>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 3 -1" delay="3200" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 3 -1" fill="forwards" to="0 0 0" > </a-animation>
+              </a-entity>
+              <a-entity class="explodable" rotation="0 -360 0" obj-model="obj: #8_inner_bot" material="side: double; color:#d05b05; transparent: true;" partinteraction lastanimationexplode>
+                  <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="1 3 -1" delay="3200" > </a-animation>
+                  <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="1 3 -1" fill="forwards" to="0 0 0" > </a-animation>
+                </a-entity>
+              </a-entity>
+              
+              
+              <a-entity class="explodable" obj-model="obj: #stelzen-obj" material="side: double; color:#040e5d; transparent: true;" partinteraction lastanimationimplode>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="0 -1 0" delay="3400" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="0 -1 0" fill="forwards" to="0 0 0" delay="1000"> </a-animation>
+              </a-entity>
+              
+        <!--      <a-entity class="explodable" obj-model="obj: #interiour-obj" material="side: double; color:#7f7f7f; transparent: true;" partinteraction lastanimationimplode>
+                <a-animation  begin="explode" attribute="position"  dur="2000" easing="ease" from="0 0 0"  fill="forwards" to="0 1 0" > </a-animation>
+                <a-animation begin="implode" attribute="position" dur="2000" easing="ease" from="0 1 0" fill="forwards" to="0 0 0" delay="2000"> </a-animation>
+              </a-entity> -->
+              
+            </a-entity>
+            <!-- Interaction Icons -->
+            </a-entity>
+            <a-entity id="futuro-icons" position="0 1.8 -2"  >
+              
+              <a-plane scale="0.15 0.15 0.15" class="clickable" position="-0.4 0 0" lighticon
+              id="lighting" look-at="[camera]" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FDayNightModusIcon.png?1518525206039" material="side: double; transparent: true; color:white; alphaTest: 0.01" >
+                                
+                <a-animation begin="iconfadeout" attribute="material.opacity" dur="1000" from="1" fill="forwards" to="0"></a-animation>
+                <a-animation begin="iconshrink"  attribute="scale"  dur="1000" easing="ease" from="0.15 0.15 0.15"  fill="forwards" to="0.001 0.001 0.001"> </a-animation>           
+                <a-animation begin="iconfadein" attribute="material.opacity"  dur="1000" from="0" fill="forwards" to="1"></a-animation>
+                <a-animation begin="icongrow"  attribute="scale"  dur="1000" easing="ease" from="0.001 0.001 0.001"  fill="forwards" to="0.15 0.15 0.15"> </a-animation>
+              </a-plane>
+              
+              <a-plane scale="0.15 0.15 0.15" class="clickable" position="0 0 0" constructionicon
+              id="construction" look-at="[camera]" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FExplosionModusIcon.png?1519143896907" material="side: double; transparent: true; color:white; alphaTest: 0.01">
+                
+                <a-animation begin="iconfadeout" attribute="material.opacity" dur="1000" from="1" fill="forwards" to="0"></a-animation>
+                <a-animation begin="iconshrink"  attribute="scale"  dur="1000" easing="ease" from="0.15 0.15 0.15"  fill="forwards" to="0.001 0.001 0.001"> </a-animation>           
+                <a-animation begin="iconfadein" attribute="material.opacity"  dur="1000" from="0" fill="forwards" to="1"></a-animation>
+                <a-animation begin="icongrow"  attribute="scale"  dur="1000" easing="ease" from="0.001 0.001 0.001"  fill="forwards" to="0.15 0.15 0.15"> </a-animation>
+
+              </a-plane>
+              
+
+              
+              <a-plane scale="0.15 0.15 0.15" class="clickable" position="0.4 0 0" planeicon
+              id="archive" look-at="[camera]" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FGalleryIcon.png?1518525208812" material="side: double; transparent: true; color:white; alphaTest: 0.01" >
+                <a-animation begin="iconfadeout" attribute="material.opacity" dur="1000" from="1" fill="forwards" to="0"></a-animation>
+                <a-animation begin="iconshrink"  attribute="scale"  dur="1000" easing="ease" from="0.15 0.15 0.15"  fill="forwards" to="0.001 0.001 0.001"> </a-animation>           
+                <a-animation begin="iconfadein" attribute="material.opacity"  dur="1000" from="0" fill="forwards" to="1"></a-animation>
+                <a-animation begin="icongrow"  attribute="scale"  dur="1000" easing="ease" from="0.001 0.001 0.001"  fill="forwards" to="0.15 0.15 0.15"> </a-animation>
+              </a-plane>
+              
+              <a-plane scale="0.001 0.001 0.001" position="0 -0.4 0" backbutton class="clickable"
+              id="back" look-at="[camera]" src="https://cdn.glitch.com/2d7ed3d2-301e-4c46-a71d-c55809c73f18%2FExitIcon.png?1517063942437" material="side: double; transparent: true; color:white; alphaTest: 0.01">
+                <a-animation begin="iconfadeout" attribute="material.opacity" dur="1000" from="1" fill="forwards" to="0"></a-animation>
+                <a-animation begin="iconshrink"  attribute="scale"  dur="1000" easing="ease" from="0.15 0.15 0.15"  fill="forwards" to="0.001 0.001 0.001"> </a-animation>      
+                
+                <a-animation begin="iconfadein" attribute="material.opacity"  dur="1000" from="0" fill="forwards" to="1" ></a-animation>
+                <a-animation begin="icongrow"  attribute="scale"  dur="1000" easing="ease" from="0.001 0.001 0.001"  fill="forwards" to="0.15 0.15 0.15" > </a-animation>
+              </a-plane>
+              
+              <!--  <a-animation 
+                attribute="color" 
+                dur="500"
+                direction="alternate"
+                easing="linear"
+                from="white"   
+                fill="forwards"
+                to="black"
+                repeat="indefinite">
+                </a-animation> -->
+              
+            </a-entity>
+          
+                <!-- planes -->
+      <a-entity position="0 0 -0.5">      
+        <a-entity rotation="0 45 0">      
+          <a-plane class="fadeimage" src="#fut2" position="0 1.6 -1.6" rotation="0 90 0" look-at="0 1.6 0" material="transparent: true; side: double; opacity: 0; color:white; alphaTest: 0.01" planeinteraction><a-animation begin="fadein" attribute="material.opacity"  dur="2000" from="0" fill="forwards" to="1"></a-animation><a-animation begin="fadeout" attribute="material.opacity" dur="2000" from="1" fill="forwards" to="0"></a-animation></a-plane>
+        </a-entity>
+        <a-entity rotation="0 90 0">      
+          <a-plane class="fadeimage" src="#fut3" position="0 1.6 -1.6" rotation="0 90 0" look-at="0 1.6 0" material="transparent: true; side: double; opacity: 0; color:white; alphaTest: 0.01" planeinteraction><a-animation begin="fadein" attribute="material.opacity"  dur="2000" from="0" fill="forwards" to="1"></a-animation><a-animation begin="fadeout" attribute="material.opacity" dur="2000" from="1" fill="forwards" to="0"></a-animation></a-plane>
+        </a-entity>
+        <a-entity rotation="0 135 0">      
+          <a-plane class="fadeimage" src="#fut4" position="0 1.6 -1.6" rotation="0 90 0" look-at="0 1.6 0" material="transparent: true; side: double; opacity: 0; color:white; alphaTest: 0.01" planeinteraction><a-animation begin="fadein" attribute="material.opacity"  dur="2000" from="0" fill="forwards" to="1"></a-animation><a-animation begin="fadeout" attribute="material.opacity" dur="2000" from="1" fill="forwards" to="0"></a-animation></a-plane>
+        </a-entity>
+        <a-entity rotation="0 180 0">      
+          <a-plane class="fadeimage" src="#fut5" position="0 1.6 -1.6" rotation="0 90 0" look-at="0 1.6 0" material="transparent: true; side: double; opacity: 0; color:white; alphaTest: 0.01" planeinteraction><a-animation begin="fadein" attribute="material.opacity"  dur="2000" from="0" fill="forwards" to="1"></a-animation><a-animation begin="fadeout" attribute="material.opacity" dur="2000" from="1" fill="forwards" to="0"></a-animation></a-plane>
+        </a-entity>
+        <a-entity rotation="0 225 0">      
+          <a-plane class="fadeimage" src="#fut6" position="0 1.6 -1.6" rotation="0 90 0" look-at="0 1.6 0" material="transparent: true; side: double; opacity: 0; color:white; alphaTest: 0.01" planeinteraction><a-animation begin="fadein" attribute="material.opacity"  dur="2000" from="0" fill="forwards" to="1"></a-animation><a-animation begin="fadeout" attribute="material.opacity" dur="2000" from="1" fill="forwards" to="0"></a-animation></a-plane>
+        </a-entity>
+        <a-entity rotation="0 270 0">      
+          <a-plane class="fadeimage" src="#fut7" position="0 1.6 -1.6" rotation="0 90 0" look-at="0 1.6 0" material="transparent: true; side: double; opacity: 0; color:white; alphaTest: 0.01" planeinteraction><a-animation begin="fadein" attribute="material.opacity"  dur="2000" from="0" fill="forwards" to="1"></a-animation><a-animation begin="fadeout" attribute="material.opacity" dur="2000" from="1" fill="forwards" to="0"></a-animation></a-plane>
+        </a-entity>
+        <a-entity rotation="0 315 0">      
+          <a-plane class="fadeimage" src="#fut8" position="0 1.6 -1.6" rotation="0 90 0" look-at="0 1.6 0" material="transparent: true; side: double; opacity: 0; color:white; alphaTest: 0.01" planeinteraction><a-animation begin="fadein" attribute="material.opacity"  dur="2000" from="0" fill="forwards" to="1"></a-animation><a-animation begin="fadeout" attribute="material.opacity" dur="2000" from="1" fill="forwards" to="0"></a-animation></a-plane>
+        </a-entity>
+      </a-entity>
+
+          </a-entity>
+
+
+      
+      <a-entity rotation="0 -89 0">
+        <a-sky id="sky-night-left"   src="#night_left" stereo="eye:left" opacity="0" radius="4000" imagelightinteraction>
+          <a-animation begin="night-fadein" attribute="material.opacity"  dur="8000" from="0" fill="forwards" to="1"></a-animation>
+          <a-animation begin="night-fadeout" attribute="material.opacity" dur="8000" from="1" fill="forwards" to="0"></a-animation>
+        </a-sky>  
+      </a-entity>
+      <a-entity rotation="0 -89 0" >
+        <a-sky id="sky-night-right"  src="#night_right" stereo="eye:right" opacity="0" radius="4000" imagelightinteraction>
+          <a-animation begin="night-fadein" attribute="material.opacity"  dur="8000" from="0" fill="forwards" to="1"></a-animation>
+          <a-animation begin="night-fadeout" attribute="material.opacity" dur="8000" from="1" fill="forwards" to="0"></a-animation>
+        </a-sky>
+      </a-entity>
+      
+    <a-entity rotation="0 -89 0"  >
+        <a-sky id="sky-day-left" src="#day_left" stereo="eye:left" radius="5000"></a-sky>  
+      </a-entity>
+      <a-entity rotation="0 -89 0"   >
+        <a-sky id="sky-day-right" src="#day_right" stereo="eye:right" radius="5000"></a-sky>
+      </a-entity>
+      
+      <!-- Video Sky sphere -->    
+      <!--<a-entity rotation="0 -95 0" id="leftsphere" geometry="primitive: sphere;
+                      radius: 100;
+                      segmentsWidth: 64;
+                      segmentsHeight: 64;"
+              material="shader: flat; src:#video; "
+              scale="-1 1 1" stereo="eye:left; split: vertical" lightinteraction>
+      </a-entity>
+
+      <a-entity rotation="0 -95 0" geometry="primitive: sphere;
+                      radius: 100;
+                      segmentsWidth: 64;
+                      segmentsHeight: 64;"
+              material="shader: flat; src:#video;"
+              scale="-1 1 1" stereo="eye:right; split: vertical">
+      </a-entity>-->
+      
+    </a-scene>
+  </body>
+</html>
