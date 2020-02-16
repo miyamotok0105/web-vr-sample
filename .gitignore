@@ -1,8 +1,8 @@
 ### https://raw.github.com/github/gitignore/055194192edb9ace9bedf5e6bf6e49f6ab824c6e/Global/Emacs.gitignore
 
-*.mp4
-*.jpg
-*.png
+#*.mp4
+#*.jpg
+#*.png
 
 # -*- mode: gitignore; -*-
 *~
